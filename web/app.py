@@ -2,6 +2,8 @@ from flask import Flask
 from flask_restful import Api, Resource
 from pymongo import MongoClient
 
+from web.auth import Register, Store, Sentence
+
 app = Flask(__name__)
 api = Api(app)
 
@@ -20,12 +22,16 @@ class Visit(Resource):
         return str("Hello user" + str(new_num))
 
 
+
 @app.route('/')
 def hello_world():
     return 'Hello World!'
 
 
 api.add_resource(Visit, '/visit/')
+api.add_resource(Register, '/auth/register/')
+api.add_resource(Store, '/auth/store/')
+api.add_resource(Sentence, '/auth/sentence/')
 
 
 if __name__ == '__main__':
